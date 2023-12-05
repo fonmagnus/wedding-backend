@@ -14,7 +14,6 @@ import django_heroku
 from pathlib import Path
 from datetime import timedelta
 import os
-import cloudinary
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'tinymce',
     'django_extensions',
-    'cloudinary',
     'root.modules.generic',
     'root.modules.main',
 ]
@@ -213,13 +211,6 @@ TINYMCE_DEFAULT_CONFIG = {
     "alignright alignjustify | bullist numlist outdent indent | "
     "removeformat | help | image | wiris | link | table | codesample code | latex",
 }
-
-
-cloudinary.config(
-    cloud_name=CLOUDINARY_CLOUD_NAME,
-    api_key=CLOUDINARY_API_KEY,
-    api_secret=CLOUDINARY_API_SECRET
-)
 
 
 django_heroku.settings(locals())
