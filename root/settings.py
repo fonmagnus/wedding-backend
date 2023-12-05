@@ -32,9 +32,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENV') is not None and os.environ.get(
     'ENV') == 'development'
-CLOUDINARY_CLOUD_NAME = os.environ.get("CLOUDINARY_CLOUD_NAME", '')
-CLOUDINARY_API_KEY = os.environ.get("CLOUDINARY_API_KEY", '')
-CLOUDINARY_API_SECRET = os.environ.get("CLOUDINARY_API_SECRET", '')
 
 ALLOWED_HOSTS = ['*']
 
@@ -117,17 +114,6 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-
-DOMAIN = os.environ.get('FRONTEND_HOST')
-SITE_NAME = os.environ.get('SITE_NAME')
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('SMTP_HOST')
-EMAIL_PORT = os.environ.get('SMTP_PORT')
-EMAIL_HOST_USER = os.environ.get('SMTP_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
