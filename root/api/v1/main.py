@@ -63,6 +63,17 @@ def get_activity(request, type):
         status=200
     )
 
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_activity_response(request, type, code):
+    activity_response = main_service.get_activity_response(type, code)
+    serializer = ActivityResponseSerializer(activity_response, many=False)
+    return JsonResponse(
+        data=serializer.data,
+        safe=False,
+        status=200
+    )
+
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def respond_activity(request, type, code):

@@ -47,6 +47,10 @@ class MainDbAccessor:
     if invitee == None:
       return
     
+    activity_response = self.get_activity_response(type, code)
+    if activity_response is not None:
+      return activity_response
+    
     (activity_response, created) = ActivityResponse.objects.update_or_create(
       defaults={
         'invitee': invitee,
@@ -59,16 +63,29 @@ class MainDbAccessor:
 
     return activity_response
   
+  def get_activity_response(self, type, code):
+    try:
+      response = ActivityResponse.objects.get(
+        activity__type=type,
+        invitee__code=code
+      )
+      return response
+    except ActivityResponse.DoesNotExist:
+      return None
+  
   def sanitize_activity_response(self, data, type):
     if type == 'orange':
       return self.sanitize_orange(data)
+    elif type == 'yellow':
+      return self.sanitize_yellow(data)
 
   def sanitize_orange(self, data):
     responses = []
     slugs = [item.get('slug') for item in Activity.PropertyOrange.questions]
+    answered_slugs = []
     for response in data.get('response'):
       slug = response.get('slug')
-      if not slug in slugs:
+      if not slug in slugs or slug in answered_slugs:
         continue
       he_or_she = response.get('he_or_she')
       if he_or_she != 'he' and he_or_she != 'she':
@@ -77,5 +94,40 @@ class MainDbAccessor:
         'slug': slug,
         'he_or_she': he_or_she
       })
+      answered_slugs.append(slug)
+    return responses
+  
+  def sanitize_yellow(self, data):
+    responses = []
+    slugs = [item.get('slug') for item in Activity.PropertyYellow.questions]
+    items = {
+      item.get('slug'): {
+        'EN': item.get('EN').get('options'),
+        'ID': item.get('ID').get('options'),
+      } for item in Activity.PropertyYellow.questions
+    }
+    
+    lang = data.get('lang')
+    
+    answered_slugs = []
+    for response in data.get('response'):
+      slug = response.get('slug')
+      answer = response.get('answer')
+      
+      if not slug in slugs or slug in answered_slugs:
+        continue
+      if not lang in ['EN', 'ID']:
+        continue
+      if not items.get(slug):
+        continue
+      if not answer in items.get(slug).get(lang):
+        continue
+      responses.append({
+        'slug': slug,
+        'lang': lang,
+        'answer': answer
+      })
+      answered_slugs.append(slug)
+    
     return responses
     

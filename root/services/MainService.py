@@ -19,5 +19,8 @@ class MainService:
   def get_activity(self, type):
     return self.db_accessor.get_activity(type)
   
+  def get_activity_response(self, type, code):
+    return self.db_accessor.get_activity_response(type, code)
+  
   def respond_activity(self, type, code, data):
     return self.db_accessor.respond_activity(type, code, data)

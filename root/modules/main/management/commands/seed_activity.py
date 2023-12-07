@@ -10,6 +10,7 @@ class Command(BaseCommand):
   
   def handle(self, *args, **options):
     self.init_orange()
+    self.init_yellow()
     self.stdout.write(self.style.SUCCESS('Successfully seeded activity'))
     pass
 
@@ -24,4 +25,12 @@ class Command(BaseCommand):
       type=Activity.ActivityChoices.ORANGE
     )
       
-      
+  def init_yellow(self):
+    questions = Activity.PropertyYellow.questions
+    Activity.objects.update_or_create(
+      defaults={
+        'type': Activity.ActivityChoices.YELLOW,
+        'content': questions
+      },
+      type=Activity.ActivityChoices.YELLOW
+    )
