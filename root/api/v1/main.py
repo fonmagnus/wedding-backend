@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 
 from root.services import main_service
-from root.modules.main.serializers import InviteeSerializer, MessageSerializer
+from root.modules.main.serializers import InviteeSerializer, MessageSerializer, ActivitySerializer, ActivityResponseSerializer
 
 
 @api_view(["GET"])
@@ -46,6 +46,28 @@ def send_message_to_bride(request, code):
 def get_messages(request):
     messages = main_service.get_messages()
     serializer = MessageSerializer(messages, many=True)
+    return JsonResponse(
+        data=serializer.data,
+        safe=False,
+        status=200
+    )
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_activity(request, type):
+    activity = main_service.get_activity(type)
+    serializer = ActivitySerializer(activity, many=False)
+    return JsonResponse(
+        data=serializer.data,
+        safe=False,
+        status=200
+    )
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def respond_activity(request, type, code):
+    response = main_service.respond_activity(type, code, request.data)
+    serializer = ActivityResponseSerializer(response, many=False)
     return JsonResponse(
         data=serializer.data,
         safe=False,

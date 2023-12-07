@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Invitee, MessageToBride
+from .models import Invitee, MessageToBride, Activity, ActivityResponse
 
 class InviteeSerializer(serializers.ModelSerializer):
   class Meta:
@@ -27,4 +27,18 @@ class MessageSerializer(serializers.ModelSerializer):
     fields = [
       'invitee',
       'message'
+    ]
+
+class ActivitySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Activity
+    fields = [
+      'type', 'content'
+    ]
+
+class ActivityResponseSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = ActivityResponse
+    fields = [
+      'response'
     ]

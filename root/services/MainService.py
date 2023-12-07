@@ -15,3 +15,9 @@ class MainService:
   
   def get_messages(self):
     return self.db_accessor.get_messages()
+  
+  def get_activity(self, type):
+    return self.db_accessor.get_activity(type)
+  
+  def respond_activity(self, type, code, data):
+    return self.db_accessor.respond_activity(type, code, data)

@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from root.modules.generic.models import BaseModel
 import random, string
@@ -30,3 +31,46 @@ class MessageToBride(BaseModel):
 
   def __str__(self):
     return f'Message from {self.invitee.name}'
+  
+
+class Activity(BaseModel):
+  class ActivityChoices(models.TextChoices):
+    BLACK = 'black'
+    RED = 'red'
+    ORANGE = 'orange'
+    YELLOW = 'yellow'
+    GREEN = 'green'
+    BLUE = 'blue'
+    VIOLET = 'violet'
+    PINK = 'pink'
+    WHITE = 'white'
+  
+  type = models.CharField(max_length=256, choices=ActivityChoices.choices)
+  content = models.JSONField(null=True, blank=True, default=dict)
+  
+  def __str__(self):
+    return self.type
+
+  class PropertyOrange:
+    questions = [
+      {
+        'slug': 'who-is-the-more-responsible',
+        'text': 'Who is the more responsible one?'
+      }, 
+      {
+        'slug': 'who-is-the-more-caring-one',
+        'text': 'Who is the more caring one?'
+      },
+      {
+        'slug': 'who-is-the-more-sarcastic',
+        'text': 'Who is the more sarcastic one?'
+      }
+    ]
+
+class ActivityResponse(BaseModel):
+  invitee = models.ForeignKey(Invitee, on_delete=models.CASCADE)
+  activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+  response = models.JSONField(null=True, blank=True, default=dict)
+
+  def __str__(self):
+    return f'{self.activity} - {self.invitee}'

@@ -7,5 +7,7 @@ urlpatterns = [
     path('me/<str:code>', main.get_invitee),
     path('rsvp/<str:code>', main.rsvp),
     path('say/<str:code>', main.send_message_to_bride),
-    path('messages', main.get_messages)
+    path('messages', main.get_messages),
+    path('activity/<str:type>', main.get_activity),
+    path('respond-activity/<str:type>/<str:code>', main.respond_activity),
 ]
