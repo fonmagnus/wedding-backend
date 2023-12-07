@@ -55,18 +55,24 @@ class Activity(BaseModel):
     questions = [
       {
         'slug': 'who-is-the-more-responsible',
-        'text': 'Who is the more responsible one?',
-        'adjective': 'Responsible'
+        'EN_text': 'Who is the more responsible one?',
+        'ID_text': 'Siapa yang lebih bertanggung jawab?',
+        'EN_adj': 'Responsible',
+        'ID_adj': 'Tanggung Jawab'
       }, 
       {
         'slug': 'who-is-the-more-caring-one',
-        'text': 'Who is the more caring one?',
-        'adjective': 'Caring'
+        'EN_text': 'Who is the more caring one?',
+        'ID_text': 'Siapa yang lebih perhatian?',
+        'EN_adj': 'Caring',
+        'ID_adj': 'Perhatian'
       },
       {
         'slug': 'who-is-the-more-sarcastic',
-        'text': 'Who is the more sarcastic one?',
-        'adjective': 'Sarcastic'
+        'EN_text': 'Who is the more sarcastic one?',
+        'ID_text': 'Siapa yang lebih sarkas (suka menyindir)?',
+        'EN_adj': 'Sarcastic',
+        'ID_adj': 'Sarkas'
       }
     ]
 
