@@ -55,15 +55,18 @@ class Activity(BaseModel):
     questions = [
       {
         'slug': 'who-is-the-more-responsible',
-        'text': 'Who is the more responsible one?'
+        'text': 'Who is the more responsible one?',
+        'adjective': 'Responsible'
       }, 
       {
         'slug': 'who-is-the-more-caring-one',
-        'text': 'Who is the more caring one?'
+        'text': 'Who is the more caring one?',
+        'adjective': 'Caring'
       },
       {
         'slug': 'who-is-the-more-sarcastic',
-        'text': 'Who is the more sarcastic one?'
+        'text': 'Who is the more sarcastic one?',
+        'adjective': 'Sarcastic'
       }
     ]
 
