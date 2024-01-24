@@ -3,8 +3,12 @@ from .models import Invitee, MessageToBride, Activity, ActivityResponse
 
 class InviteeAdmin(admin.ModelAdmin):
     readonly_fields = ('code',)
-    list_display = ['name', 'code', 'quota', 'is_attended']
+    list_display = ['name', 'code', 'quota', 'is_attended', 'display_invitation_url']
     list_per_page = 300
+
+    def display_invitation_url(self, obj):
+        return obj.invitation_url
+    display_invitation_url.short_description = 'Invitation URL'
 
 class ActivityAdmin(admin.ModelAdmin):
     pass

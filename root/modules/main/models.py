@@ -21,8 +21,14 @@ class Invitee(BaseModel):
   def save(self):
     if self.code == None or len(self.code) == 0:
       self.code = self.random_alphanumeric_string(9)
+      while Invitee.objects.filter(code=self.code).exists():
+        self.code = self.random_alphanumeric_string(9)
 
     super().save()
+  
+  @property
+  def invitation_url(self):
+    return f'https://atalegalore.com?code={self.code}'
 
 
 class MessageToBride(BaseModel):
