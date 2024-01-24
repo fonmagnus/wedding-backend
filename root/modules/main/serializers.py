@@ -17,6 +17,7 @@ class InviteeNameSerializer(serializers.ModelSerializer):
     model = Invitee
     fields = [
       'name',
+      'is_attended'
     ]
   
 
