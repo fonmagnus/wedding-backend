@@ -2,7 +2,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from django.http import JsonResponse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
+
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 
@@ -42,7 +43,7 @@ def logout(request):
 @permission_classes([AllowAny])
 def activate(request, uidb64=None, token=None):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = UserAccount.objects.get(pk=uid)
         print(user)
     except UserAccount.DoesNotExist:

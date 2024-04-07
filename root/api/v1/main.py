@@ -84,3 +84,27 @@ def respond_activity(request, type, code):
         safe=False,
         status=200
     )
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_loves(request):
+    loves = main_service.get_loves()
+    return JsonResponse(
+        data={
+            'loves': loves,
+        },
+        safe=False,
+        status=200
+    )
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def send_loves(request, code):
+    loves = main_service.send_loves(code)
+    return JsonResponse(
+        data={
+            'loves': loves,
+        },
+        safe=False,
+        status=200
+   )

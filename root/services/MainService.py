@@ -7,6 +7,12 @@ class MainService:
   def get_invitee(self, code):
     return self.db_accessor.get_invitee(code)
   
+  def get_loves(self):
+    return self.db_accessor.get_loves()
+  
+  def send_loves(self, code):
+    return self.db_accessor.send_loves(code)
+  
   def rsvp(self, code, request):
     return self.db_accessor.rsvp(code, request)
   

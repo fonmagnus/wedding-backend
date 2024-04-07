@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Invitee, MessageToBride, Activity, ActivityResponse
+from .models import Invitee, MessageToBride, Activity, ActivityResponse, Love
 
 class InviteeAdmin(admin.ModelAdmin):
     readonly_fields = ('code',)
@@ -20,3 +20,4 @@ admin.site.register(Invitee, InviteeAdmin)
 admin.site.register(MessageToBride)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(ActivityResponse, ActivityResponseAdmin)
+admin.site.register(Love)

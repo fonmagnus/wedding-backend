@@ -9,6 +9,16 @@ class MainDbAccessor:
       return None
     return invitee.first()
   
+  def get_loves(self):
+    return Love.objects.all().count()
+  
+  def send_loves(self, code):
+    invitee = self.get_invitee(code)
+    if invitee is None:
+      return None
+    love = Love.objects.create(invitee=invitee)
+    return self.get_loves()
+  
   def rsvp(self, code, request):
     invitee = self.get_invitee(code)
     invitee.quota = max(1, min(request.get('quota', 1), 10))

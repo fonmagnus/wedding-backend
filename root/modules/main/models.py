@@ -29,6 +29,13 @@ class Invitee(BaseModel):
   @property
   def invitation_url(self):
     return f'https://atalegalore.com?code={self.code}'
+  
+class Love(BaseModel):
+  invitee = models.ForeignKey(Invitee, on_delete=models.DO_NOTHING, null=True, blank=True)
+  love_given_at = models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return f'{self.invitee.name} - {self.love_given_at}'
 
 
 class MessageToBride(BaseModel):
