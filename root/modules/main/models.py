@@ -526,7 +526,7 @@ class Activity(BaseModel):
       {
         'slug': 'fruits-fruits',
         'EN': {
-          'text': "Gaby suka dan hampir setiap hari makan buah.",
+          'text': "Gaby loves to eat fruit almost everyday.",
           'options': [
             'True',
             'False'
