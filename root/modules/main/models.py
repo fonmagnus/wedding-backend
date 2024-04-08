@@ -343,7 +343,7 @@ class Activity(BaseModel):
       {
         'slug': 'confession',
         'EN': {
-          'text': "Where is the firsst time Arnold confessed his feeling to Gaby?",
+          'text': "Where is the first time Arnold confessed his feeling to Gaby?",
           'options': [
             'Ferris Wheel',
             'Top of a Skyscraper',
