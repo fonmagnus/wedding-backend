@@ -14,8 +14,6 @@ class MainDbAccessor:
   
   def send_loves(self, code):
     invitee = self.get_invitee(code)
-    if invitee is None:
-      return None
     love = Love.objects.create(invitee=invitee)
     return self.get_loves()
   
