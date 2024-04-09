@@ -10,6 +10,7 @@ class Invitee(BaseModel):
   quota = models.IntegerField(default=1)
   is_attended = models.BooleanField(default=False)
   message_from_bride = models.TextField(null=True, blank=True)
+  opened_invitation_at = models.DateTimeField(null=True, blank=True)
 
   def random_alphanumeric_string(self, length):
     characters = string.ascii_letters + string.digits

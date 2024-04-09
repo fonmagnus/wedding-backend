@@ -1,4 +1,5 @@
 from root.modules.main.models import *
+from django.utils import timezone
 
 class MainDbAccessor:
   def get_invitee(self, code) -> Invitee :
@@ -8,6 +9,15 @@ class MainDbAccessor:
     if (not invitee.exists()):
       return None
     return invitee.first()
+  
+  def open_invitation(self, code):
+    invitee = self.get_invitee(code)
+    if invitee is None:
+      return None
+    
+    invitee.opened_invitation_at = timezone.now()
+    invitee.save()
+    return invitee
   
   def get_loves(self):
     return Love.objects.all().count()

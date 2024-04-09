@@ -12,5 +12,6 @@ urlpatterns = [
     path('activity-response/<str:type>/<str:code>', main.get_activity_response),
     path('respond-activity/<str:type>/<str:code>', main.respond_activity),
     path('get-loves', main.get_loves),
-    path('send-loves/<str:code>', main.send_loves)
+    path('send-loves/<str:code>', main.send_loves),
+    path('open-invitation/<str:code>', main.open_invitation)
 ]

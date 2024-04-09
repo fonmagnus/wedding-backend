@@ -108,3 +108,14 @@ def send_loves(request, code):
         safe=False,
         status=200
    )
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def open_invitation(request, code):
+    invitee = main_service.open_invitation(code)
+    serializer = InviteeSerializer(invitee, many=False)
+    return JsonResponse(
+        data=serializer.data,
+        safe=False,
+        status=200
+    )
