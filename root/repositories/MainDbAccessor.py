@@ -2,6 +2,20 @@ from root.modules.main.models import *
 from django.utils import timezone
 
 class MainDbAccessor:
+  def register_invitee(self, data):
+    allowed_friend_group = ['BCA']
+    friend_group = data.get('friend_group')
+    if not friend_group in allowed_friend_group:
+      return None
+    
+    friend_group = FriendGroup.objects.get(name=friend_group)
+    invitee = Invitee.objects.create(
+      friend_group=friend_group,
+      name=data.get('name'),
+      quota=0,
+    )
+    return invitee
+
   def get_invitee(self, code) -> Invitee :
     if isinstance(code, Invitee):
       return code

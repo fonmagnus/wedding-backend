@@ -119,3 +119,14 @@ def open_invitation(request, code):
         safe=False,
         status=200
     )
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def register_invitee(request):
+    invitee = main_service.register_invitee(request.data)
+    serializer = InviteeSerializer(invitee, many=False)
+    return JsonResponse(
+        data=serializer.data,
+        safe=False,
+        status=200
+    )

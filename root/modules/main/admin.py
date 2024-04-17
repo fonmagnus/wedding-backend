@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Invitee, MessageToBride, Activity, ActivityResponse, Love
+from .models import Invitee, MessageToBride, Activity, ActivityResponse, Love, FriendGroup
 
 class InviteeAdmin(admin.ModelAdmin):
     readonly_fields = ('code',)
-    list_display = ['name', 'code', 'quota', 'is_attended', 'display_invitation_url', 'opened_invitation_at']
+    list_display = ['name', 'code', 'quota', 'is_attended', 'display_invitation_url', 'opened_invitation_at', 'friend_group']
     list_per_page = 300
 
     def display_invitation_url(self, obj):
@@ -21,3 +21,4 @@ admin.site.register(MessageToBride)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(ActivityResponse, ActivityResponseAdmin)
 admin.site.register(Love)
+admin.site.register(FriendGroup)

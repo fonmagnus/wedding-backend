@@ -4,6 +4,13 @@ from root.modules.generic.models import BaseModel
 import random, string
 
 # Create your models here.
+class FriendGroup(BaseModel):
+  name = models.CharField(max_length=256, db_index=True)
+  photo_order = models.IntegerField(default=0)
+
+  def __str__(self):
+    return self.name
+
 class Invitee(BaseModel):
   name = models.CharField(max_length=512, db_index=True)
   code = models.CharField(max_length=256, db_index=True, editable=False)
@@ -11,6 +18,7 @@ class Invitee(BaseModel):
   is_attended = models.BooleanField(default=False)
   message_from_bride = models.TextField(null=True, blank=True)
   opened_invitation_at = models.DateTimeField(null=True, blank=True)
+  friend_group = models.ForeignKey(FriendGroup, on_delete=models.SET_NULL, null=True, blank=True)
 
   def random_alphanumeric_string(self, length):
     characters = string.ascii_letters + string.digits
@@ -19,13 +27,13 @@ class Invitee(BaseModel):
   def __str__(self):
     return f'{self.name} - {self.code}'
 
-  def save(self):
+  def save(self, *args, **kwargs):
     if self.code == None or len(self.code) == 0:
       self.code = self.random_alphanumeric_string(9)
       while Invitee.objects.filter(code=self.code).exists():
         self.code = self.random_alphanumeric_string(9)
 
-    super().save()
+    super(Invitee, self).save(*args, **kwargs)
   
   @property
   def invitation_url(self):

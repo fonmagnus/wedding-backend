@@ -4,6 +4,9 @@ class MainService:
   def __init__(self):
     self.db_accessor = MainDbAccessor()
 
+  def register_invitee(self, data):
+    return self.db_accessor.register_invitee(data)
+
   def get_invitee(self, code):
     return self.db_accessor.get_invitee(code)
   
