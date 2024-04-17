@@ -16,9 +16,12 @@ class ActivityAdmin(admin.ModelAdmin):
 class ActivityResponseAdmin(admin.ModelAdmin):
     pass
 
+class FriendGroupAdmin(admin.ModelAdmin):
+    list_display = ['name', 'photo_order']
+
 admin.site.register(Invitee, InviteeAdmin)
 admin.site.register(MessageToBride)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(ActivityResponse, ActivityResponseAdmin)
 admin.site.register(Love)
-admin.site.register(FriendGroup)
+admin.site.register(FriendGroup, FriendGroupAdmin)
