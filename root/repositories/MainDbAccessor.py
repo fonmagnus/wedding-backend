@@ -7,6 +7,8 @@ class MainDbAccessor:
     friend_group = data.get('friend_group')
     if not friend_group in allowed_friend_group:
       return None
+    if data.get('name') is None or len(data.get('name')) == 0:
+      return None
     
     friend_group = FriendGroup.objects.get(name=friend_group)
     invitee = Invitee.objects.create(
