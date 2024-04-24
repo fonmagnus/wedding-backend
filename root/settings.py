@@ -215,3 +215,4 @@ TINYMCE_DEFAULT_CONFIG = {
 
 django_heroku.settings(locals())
 TIME_ZONE = 'Asia/Jakarta'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
