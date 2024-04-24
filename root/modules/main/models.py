@@ -40,7 +40,7 @@ class Invitee(BaseModel):
     return f'https://atalegalore.com?code={self.code}'
   
 class Love(BaseModel):
-  invitee = models.ForeignKey(Invitee, on_delete=models.DO_NOTHING, null=True, blank=True)
+  invitee = models.ForeignKey(Invitee, on_delete=models.SET_NULL, null=True, blank=True)
   love_given_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
