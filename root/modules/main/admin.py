@@ -4,7 +4,9 @@ from .models import Invitee, MessageToBride, Activity, ActivityResponse, Love, F
 class InviteeAdmin(admin.ModelAdmin):
     readonly_fields = ('code',)
     list_display = ['name', 'code', 'quota', 'is_attended', 'display_invitation_url', 'opened_invitation_at', 'friend_group']
-    list_per_page = 300
+    list_per_page = 500
+    search_fields = ['name', 'code']  # Add this line
+
 
     def display_invitation_url(self, obj):
         return obj.invitation_url
